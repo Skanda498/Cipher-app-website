@@ -7,54 +7,45 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
             text-align: center;
-            background-color: #f2f2f2;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            margin-top: 50px;
+            padding: 50px;
         }
         img {
             width: 200px;
             height: auto;
+            margin-bottom: 20px;
         }
-        h1 {
-            color: #ff0000;
-        }
-        audio {
-            margin-top: 20px;
-        }
-        .download-btn {
+        .download-button {
             display: inline-block;
-            margin-top: 20px;
             padding: 12px 25px;
-            background-color: #ff0000;
-            color: #fff;
+            margin: 20px 0;
+            background-color: #ff4500;
+            color: white;
             text-decoration: none;
             font-weight: bold;
             border-radius: 8px;
         }
-        .download-btn:hover {
-            background-color: #cc0000;
+        audio {
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Welcome to Cipher App</h1>
-        <img src="assets/Cipher.png" alt="Cipher App Logo">
-        <div>
-            <audio controls>
-                <source src="assets/Shiva.mp3" type="audio/mpeg">
-                Your browser does not support the audio element.
-            </audio>
-        </div>
-        <div>
-            <a class="download-btn" href="https://github.com/Skanda498/Cipher-app-website/releases/download/v1.0.0/Cipher-Release-v1.apk" target="_blank">
-                Download APK
-            </a>
-        </div>
+    <h1>Welcome to Cipher App</h1>
+    
+    <!-- Logo -->
+    <img src="Cipher.png" alt="Cipher App Logo">
+
+    <!-- Music -->
+    <audio controls>
+        <source src="Shiva.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- APK Download -->
+    <div>
+        <a href="Cipher-Release-v1.apk" class="download-button">Download Cipher APK</a>
     </div>
 </body>
 </html>
