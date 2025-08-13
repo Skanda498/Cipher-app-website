@@ -7,42 +7,72 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
+            background-color: #fff8f0;
+            color: #333;
             text-align: center;
-            padding: 50px;
+            margin: 0;
+            padding: 20px;
         }
-        img {
-            width: 200px;
-            margin-bottom: 20px;
+        header {
+            margin-bottom: 30px;
+        }
+        header img {
+            width: 150px;
+            height: auto;
+        }
+        h1 {
+            color: #d9534f;
+        }
+        .description {
+            max-width: 700px;
+            margin: 20px auto;
+            font-size: 1.1em;
+            line-height: 1.6em;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        .buttons a {
+            display: inline-block;
+            margin: 10px;
+            padding: 15px 25px;
+            font-size: 1em;
+            color: #fff;
+            background-color: #d9534f;
+            text-decoration: none;
+            border-radius: 8px;
+        }
+        .buttons a:hover {
+            background-color: #c9302c;
         }
         audio {
             margin-top: 20px;
-            margin-bottom: 20px;
-        }
-        a {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #ff0000;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-        a:hover {
-            background-color: #cc0000;
+            outline: none;
         }
     </style>
 </head>
 <body>
-    <h1>Welcome to Cipher App</h1>
-    <img src="Cipher.png" alt="Cipher App Logo">
-    
-    <p>Listen to our music:</p>
-    <audio controls>
+    <header>
+        <img src="Cipher.png" alt="Cipher App Logo">
+        <h1>Cipher Chat App</h1>
+    </header>
+
+    <div class="description">
+        <p>
+            Cipher is an anonymous chat app built with privacy and simplicity in mind. 
+            You can chat globally without signing up with an email or phone number. 
+            Experience seamless anonymous communication powered by Firebase.
+        </p>
+    </div>
+
+    <div class="buttons">
+        <a href="Cipher-Release-v1.apk" download>Download APK</a>
+        <a href="https://sourceforge.net/projects/cipher-chat-app/" target="_blank">Download from SourceForge</a>
+    </div>
+
+    <audio controls autoplay loop>
         <source src="Shiva.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
-
-    <p>Download the app:</p>
-    <a href="https://github.com/Skanda498/Cipher-app-website/releases/download/v1.0.0/Cipher-Release-v1.apk" download>Download APK</a>
 </body>
 </html>
