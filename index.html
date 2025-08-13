@@ -1,139 +1,63 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Cipher — Anonymous Chat</title>
-  <meta name="description" content="Cipher is a lightweight anonymous chat app. Download the latest APK and try it now." />
-  <link rel="icon" href="assets/Cipher.png" />
-  <style>
-    :root {
-      --bg1: #0f172a; /* slate-900 */
-      --bg2: #111827; /* gray-900 */
-      --text: #e5e7eb; /* gray-200 */
-      --muted: #9ca3af; /* gray-400 */
-      --accent: #22c55e; /* green-500 */
-      --accent2: #06b6d4; /* cyan-500 */
-      --card: #111827ee;
-      --button: #10b981; /* emerald-500 */
-      --button-h: #059669; /* emerald-600 */
-      --ring: #34d399;
-    }
-    * { box-sizing: border-box }
-    html, body { height: 100% }
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-      color: var(--text);
-      background:
-        radial-gradient(1200px 800px at 10% -10%, #1e293b 0%, transparent 60%),
-        radial-gradient(900px 600px at 100% 0%, #0ea5e9 0%, transparent 55%),
-        linear-gradient(180deg, var(--bg1), var(--bg2));
-    }
-    .wrap { max-width: 1000px; margin: 0 auto; padding: 28px 20px 60px }
-    header { display: flex; gap: 14px; align-items: center; }
-    header img { width: 56px; height: 56px; border-radius: 14px; box-shadow: 0 8px 24px #0008 }
-    h1 { font-size: clamp(28px, 3.6vw, 42px); margin: 0 }
-    p.lead { color: var(--muted); margin: 6px 0 0 }
-    .card {
-      background: var(--card);
-      border: 1px solid #ffffff14;
-      border-radius: 18px;
-      padding: 20px;
-      margin-top: 18px;
-      box-shadow: 0 10px 30px #0007;
-      backdrop-filter: blur(6px);
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap: 18px;
-    }
-    @media (max-width: 880px){ .grid{ grid-template-columns: 1fr } }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-      background: var(--button);
-      color: #04130a;
-      padding: 12px 18px;
-      border-radius: 12px;
-      font-weight: 700;
-      transition: transform .06s ease, background .2s ease, box-shadow .2s ease;
-      box-shadow: 0 10px 24px #10b98130, inset 0 1px 0 #fff4;
-      border: 1px solid #ffffff22;
-    }
-    .btn:hover { background: var(--button-h); transform: translateY(-1px) }
-    .btn:active { transform: translateY(1px) }
-    .hint { color: var(--muted); font-size: 13px; margin-top: 8px }
-    .panel {
-      border: 1px dashed #ffffff22; border-radius: 14px; padding: 14px;
-      background: #0b1220cc;
-    }
-    .tag {
-      display: inline-block; padding: 4px 10px; margin: 6px 6px 0 0;
-      border-radius: 999px; background: #0ea5e926; color: #a5f3fc; border: 1px solid #67e8f9;
-      font-size: 12px; font-weight: 600;
-    }
-    footer { opacity: .8; margin-top: 26px; font-size: 13px; color: var(--muted) }
-    audio { width: 100%; outline: none; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cipher App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        header {
+            background-color: #c8102e;
+            color: #fff;
+            padding: 20px;
+        }
+        img.logo {
+            width: 150px;
+            margin: 20px 0;
+        }
+        .download-btn {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 15px 30px;
+            background-color: #0078d7;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+        .download-btn:hover {
+            background-color: #005a9e;
+        }
+        audio {
+            margin: 20px 0;
+        }
+    </style>
 </head>
 <body>
-  <div class="wrap">
     <header>
-      <img src="assets/Cipher.png" alt="Cipher app icon" />
-      <div>
-        <h1>Cipher — Anonymous Chat</h1>
-        <p class="lead">Lightweight, private, and simple. Built with Firebase.</p>
-      </div>
+        <h1>Welcome to Cipher App</h1>
+        <p>Anonymous global chat app with Murugan theme</p>
     </header>
 
-    <div class="grid">
-      <section class="card">
-        <h2 style="margin-top:0">Download</h2>
-        <p>Install the latest Android build (signed release):</p>
-        <p>
-          <a class="btn" href="assets/Cipher-Release-v1.apk" download>
-            ⬇️ Download APK
-          </a>
-        </p>
-        <p class="hint">If your browser warns that the file “can’t be downloaded securely”, choose <em>Keep</em> / <em>Download anyway</em>. APKs are executable files and browsers often warn by default.</p>
+    <img class="logo" src="assets/Cipher.png" alt="Cipher App Logo">
 
-        <div class="panel" style="margin-top:14px">
-          <strong>App Info</strong><br/>
-          Package: <code>com.skandadevotee.cipher</code><br/>
-          Version: <code>1.0.0</code> • Signed release build
-          <div style="margin-top:10px">
-            <span class="tag">Anonymous chat</span>
-            <span class="tag">Firebase</span>
-            <span class="tag">Android</span>
-          </div>
-        </div>
-      </section>
-
-      <aside class="card">
-        <h2 style="margin-top:0">Listen while you browse</h2>
-        <p class="hint">Tap play to hear your track.</p>
-        <audio id="player" controls preload="auto">
-          <source src="assets/Shiva.mp3" type="audio/mpeg" />
-          Your browser doesn’t support the audio element.
-        </audio>
-        <div style="margin-top:12px">
-          <button class="btn" onclick="document.getElementById('player').play()">▶️ Play</button>
-          <button class="btn" style="margin-left:8px" onclick="document.getElementById('player').pause()">⏸ Pause</button>
-        </div>
-      </aside>
+    <div>
+        <a class="download-btn" href="https://github.com/Skanda498/Cipher-app-website/releases/download/v1.0.0/Cipher-Release-v1.apk" target="_blank">
+            Download APK
+        </a>
     </div>
 
-    <footer>
-      © <span id="y"></span> Cipher. Built by Irene Dutta (skandadevotee).
-    </footer>
-  </div>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
+    <div>
+        <audio controls>
+            <source src="assets/Shiva.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
 </body>
 </html>
