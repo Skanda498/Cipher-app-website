@@ -2,96 +2,111 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>Cipher Chat App</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cipher App</title>
     <style>
         body {
-            margin: 0;
             font-family: Arial, sans-serif;
-            background: linear-gradient(to bottom right, #8B0000, #FFD700);
-            color: white;
+            background: linear-gradient(135deg, #1f1c2c, #928dab);
+            color: #fff;
             text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
+            padding: 30px;
         }
-        .app-icon {
-            width: 150px;
-            margin-top: 20px;
+        header {
+            margin-bottom: 20px;
         }
         h1 {
             font-size: 2.5em;
-            margin: 15px 0 5px 0;
+            margin-bottom: 10px;
         }
-        p {
-            font-size: 1.2em;
-            max-width: 500px;
-            margin: 0 auto 20px;
+        .icon {
+            width: 120px;
+            height: 120px;
         }
-        .download-btn {
-            background-color: #FFD700;
-            color: #8B0000;
+        .section {
+            margin: 30px 0;
+        }
+        a.download-link {
+            display: inline-block;
+            background: #ff4e00;
+            color: #fff;
             padding: 12px 25px;
-            border: none;
-            border-radius: 25px;
-            font-size: 1.2em;
-            cursor: pointer;
+            border-radius: 8px;
             text-decoration: none;
             font-weight: bold;
-            transition: 0.3s;
+            margin: 10px;
+            transition: background 0.3s ease;
         }
-        .download-btn:hover {
-            background-color: #FFA500;
+        a.download-link:hover {
+            background: #ff7300;
         }
-        .lord-img {
-            width: 250px;
+        form {
+            display: inline-block;
             margin-top: 20px;
-            opacity: 0;
-            animation: fadeIn 2s forwards;
+            text-align: left;
+            background: rgba(0,0,0,0.5);
+            padding: 20px;
+            border-radius: 10px;
         }
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-            }
+        form input, form textarea {
+            width: 100%;
+            margin: 8px 0;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
         }
-        footer {
-            margin-top: 30px;
-            font-size: 0.9em;
-            opacity: 0.8;
+        form button {
+            background: #ff4e00;
+            color: #fff;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        form button:hover {
+            background: #ff7300;
+        }
+        audio {
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
+    <header>
+        <img src="Cipher.png" alt="Cipher App Icon" class="icon">
+        <h1>Welcome to Cipher Chat App</h1>
+        <p>Connect anonymously and chat safely.</p>
+    </header>
 
-    <!-- App Icon -->
-    <img src="Cipher.png" alt="Cipher App Icon" class="app-icon">
+    <div class="section">
+        <h2>Download App</h2>
+        <a href="Cipher-Release-v1.apk" class="download-link" download>Download Signed APK</a>
+        <a href="https://sourceforge.net/projects/cipher-chat-app/" class="download-link" target="_blank">Download from SourceForge</a>
+    </div>
 
-    <!-- App Name -->
-    <h1>Cipher – Anonymous Chat</h1>
+    <div class="section">
+        <h2>Contact / Feedback</h2>
+        <form action="https://formspree.io/f/xwpqzaer" method="POST">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
 
-    <!-- Description -->
-    <p>Secure and private messaging with no sign-up. Connect instantly with people worldwide.</p>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="_replyto" required>
 
-    <!-- Download Button -->
-    <a href="https://sourceforge.net/projects/cipher-app/files/latest/download" class="download-btn" target="_blank">
-        📥 Download Now
-    </a>
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
 
-    <!-- Lord Murugan Image -->
-    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Murugan_statue.jpg" alt="Lord Murugan" class="lord-img">
+            <button type="submit">Send</button>
+        </form>
+    </div>
 
-    <!-- Background Music -->
-    <audio autoplay loop>
-        <source src="Shiva.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
-
-    <!-- Footer -->
-    <footer>
-        &copy; 2025 Cipher App. All Rights Reserved.  
-    </footer>
-
+    <div class="section">
+        <h2>Background Music</h2>
+        <audio controls autoplay loop>
+            <source src="Shiva.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
 </body>
 </html>
