@@ -70,6 +70,42 @@
         audio {
             margin-top: 20px;
         }
+
+        /* Self Love Protocol styles */
+        #selfLoveBtn {
+            display: block;
+            margin: 40px auto 20px auto;
+            padding: 15px 25px;
+            background-color: #ff4e00;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        #selfLoveSection {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            color: #000;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+            text-align: left;
+        }
+        #selfLoveSection h2, #selfLoveSection h3 {
+            color: #333;
+        }
+        #selfLoveSection ul {
+            margin-left: 20px;
+        }
+        #selfLoveSection textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            resize: vertical;
+        }
     </style>
 </head>
 <body>
@@ -108,5 +144,41 @@
             Your browser does not support the audio element.
         </audio>
     </div>
+
+    <!-- Self Love Protocol Button -->
+    <button id="selfLoveBtn">Self Love Protocol</button>
+
+    <!-- Self Love Protocol Section -->
+    <div id="selfLoveSection">
+        <h2>Self Love Protocol</h2>
+        <audio controls autoplay>
+            <source src="emblem.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+
+        <h3>Meditation (5–10 min)</h3>
+        <p>Sit comfortably, close your eyes, and focus on your breath. Inhale deeply, exhale slowly, releasing tension. Visualize a warm golden light filling your heart and radiating through your body.</p>
+
+        <h3>Affirmations</h3>
+        <ul>
+            <li>I am worthy of love, peace, and happiness.</li>
+            <li>I honor my body, mind, and soul.</li>
+            <li>I release fear and embrace confidence and clarity.</li>
+        </ul>
+
+        <h3>Journaling (2–3 min)</h3>
+        <textarea placeholder="Write here..."></textarea>
+
+        <h3>Energy Visualization (2–3 min)</h3>
+        <p>Imagine a protective golden bubble surrounding your body. Feel it shield you from negativity and amplify positive energy. Sense this energy grounding you, filling you with confidence, love, and calm.</p>
+    </div>
+
+    <script>
+        document.getElementById('selfLoveBtn').addEventListener('click', function() {
+            var section = document.getElementById('selfLoveSection');
+            section.style.display = 'block';
+            section.scrollIntoView({behavior: "smooth"});
+        });
+    </script>
 </body>
 </html>
