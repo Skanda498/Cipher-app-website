@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cipher Chat App</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #1f1c2c, #928dab);
+    color: #fff;
+    text-align: center;
+    padding: 30px;
+}
+header { margin-bottom: 20px; }
+h1 { font-size: 2.5em; margin-bottom: 10px; }
+.icon { width: 120px; height: 120px; }
+.section { margin: 30px 0; }
+a.download-link, .action-btn {
+    display: inline-block;
+    background: #ff4e00;
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 10px;
+    transition: background 0.3s ease;
+    cursor: pointer;
+}
+a.download-link:hover, .action-btn:hover { background: #ff7300; }
+form {
+    display: inline-block;
+    margin-top: 20px;
+    text-align: left;
+    background: rgba(0,0,0,0.5);
+    padding: 20px;
+    border-radius: 10px;
+}
+form input, form textarea {
+    width: 100%;
+    margin: 8px 0;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+}
+form button {
+    background: #ff4e00;
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+form button:hover { background: #ff7300; }
+audio { margin-top: 20px; }
+
+/* Sections for Self Love & Math Behind Cipher */
+#selfLoveSection, #mathCipherSection {
+    display: none;
+    background: rgba(255, 255, 255, 0.95);
+    color: #000;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 10px;
+    text-align: left;
+}
+#selfLoveSection h2, #selfLoveSection h3,
+#mathCipherSection h2, #mathCipherSection p {
+    color: #333;
+}
+#selfLoveSection ul { margin-left: 20px; }
+#selfLoveSection textarea { width: 100%; padding:10px; margin-bottom: 20px; border-radius:6px; border:1px solid #ccc; resize: vertical; }
+
+</style>
+</head>
+<body>
+
+<header>
+    <img src="Cipher.png" alt="Cipher App Icon" class="icon">
+    <h1>Welcome to Cipher Chat App</h1>
+    <p>Connect anonymously and chat safely.</p>
+</header>
+
+<div class="section">
+    <h2>Download App</h2>
+    <a href="Cipher-Release-v1.apk" class="download-link" download>Download Signed APK</a>
+    <a href="https://sourceforge.net/projects/cipher-chat-app/" class="download-link" target="_blank">Download from SourceForge</a>
+    <button class="action-btn" id="mathCipherBtn">Math Behind Cipher</button>
+</div>
+
+<div class="section">
+    <h2>Contact / Feedback</h2>
+    <form action="https://formspree.io/f/xwpqzaer" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="_replyto" required>
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+        <button type="submit">Send</button>
+    </form>
+</div>
+
+<div class="section">
+    <h2>Background Music</h2>
+    <audio controls autoplay loop>
+        <source src="Shiva.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+</div>
+
+<!-- Self Love Protocol Button -->
+<button class="action-btn" id="selfLoveBtn">Self Love Protocol</button>
+
+<!-- Self Love Protocol Section -->
+<div id="selfLoveSection">
+    <h2>Self Love Protocol</h2>
+    <audio controls autoplay>
+        <source src="emblem.mp3" type="audio/mpeg">
+    </audio>
+    <h3>Meditation (5–10 min)</h3>
+    <p>Sit comfortably, close your eyes, and focus on your breath. Visualize a warm golden light filling your heart.</p>
+    <h3>Affirmations</h3>
+    <ul>
+        <li>I am worthy of love, peace, and happiness.</li>
+        <li>I honor my body, mind, and soul.</li>
+        <li>I release fear and embrace confidence.</li>
+    </ul>
+    <h3>Journaling (2–3 min)</h3>
+    <textarea placeholder="Write here..."></textarea>
+</div>
+
+<!-- Math Behind Cipher Section -->
+<div id="mathCipherSection">
+    <h2>Math Behind Cipher</h2>
+    <p>This is where you can explain the algorithm, logic, or math principles behind the Cipher Chat App.</p>
+</div>
+
+<!-- JS for buttons (must be at bottom!) -->
+<script>
+document.getElementById('selfLoveBtn').addEventListener('click', function(){
+    var s = document.getElementById('selfLoveSection');
+    s.style.display = (s.style.display==='block') ? 'none' : 'block';
+    s.scrollIntoView({behavior: "smooth"});
+});
+
+document.getElementById('mathCipherBtn').addEventListener('click', function(){
+    var m = document.getElementById('mathCipherSection');
+    m.style.display = (m.style.display==='block') ? 'none' : 'block';
+    m.scrollIntoView({behavior: "smooth"});
+});
+</script>
+
+</body>
+</html>
