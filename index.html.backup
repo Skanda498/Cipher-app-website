@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cipher Chat App</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #1f1c2c, #928dab);
+        color: #fff;
+        text-align: center;
+        padding: 30px;
+    }
+    header { margin-bottom: 20px; }
+    h1 { font-size: 2.5em; margin-bottom: 10px; }
+    .icon { width: 120px; height: 120px; }
+    .section { margin: 30px 0; }
+    a.download-link {
+        display: inline-block;
+        background: #ff4e00;
+        color: #fff;
+        padding: 12px 25px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        margin: 10px;
+        transition: background 0.3s ease;
+    }
+    a.download-link:hover { background: #ff7300; }
+    form {
+        display: inline-block;
+        margin-top: 20px;
+        text-align: left;
+        background: rgba(0,0,0,0.5);
+        padding: 20px;
+        border-radius: 10px;
+    }
+    form input, form textarea {
+        width: 100%;
+        margin: 8px 0;
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+    }
+    form button {
+        background: #ff4e00;
+        color: #fff;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+    form button:hover { background: #ff7300; }
+    audio { margin-top: 20px; }
+
+    /* Protocol Buttons */
+    .protocol-btn {
+        display: block;
+        margin: 25px auto;
+        padding: 15px 25px;
+        background-color: #ff4e00;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        width: 220px;
+        transition: all 0.3s ease;
+    }
+    .protocol-btn:hover {
+        background-color: #ff7300;
+        transform: scale(1.05);
+    }
+
+    /* Protocol Sections */
+    .protocol-section {
+        display: none;
+        background: rgba(255, 255, 255, 0.95);
+        color: #000;
+        padding: 25px;
+        margin-top: 20px;
+        border-radius: 10px;
+        text-align: left;
+    }
+    .protocol-section h2, .protocol-section h3 { color: #333; }
+    .protocol-section ul { margin-left: 20px; }
+    .protocol-section textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        resize: vertical;
+    }
+
+    /* Profile Section Styles */
+    .profile-container {
+        text-align: center;
+        margin: 20px 0;
+    }
+    .profile-image {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        border: 4px solid #ff4e00;
+        object-fit: cover;
+        margin: 15px auto;
+    }
+    .profile-links {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin: 20px 0;
+    }
+    .profile-link {
+        display: inline-block;
+        background: #8aaee4;
+        color: white;
+        padding: 12px 20px;
+        border-radius: 25px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+    .profile-link:hover {
+        background: #6d93d1;
+        transform: translateY(-2px);
+    }
+    .booking-btn {
+        background: #ff4e00;
+        color: white;
+        padding: 15px 30px;
+        border: none;
+        border-radius: 25px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        margin: 20px 0;
+        transition: all 0.3s ease;
+    }
+    .booking-btn:hover {
+        background: #ff7300;
+        transform: scale(1.05);
+    }
+
+    /* Healing Ritual Styles */
+    #healingRitualBtn {
+        background-color: #8aaee4;
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 8px;
+        margin: 20px 0;
+        cursor: pointer;
+        font-size: 16px;
+        transition: all 0.3s ease;
+    }
+    #healingRitualBtn:hover {
+        background-color: #6d93d1;
+        transform: scale(1.05);
+    }
+
+    #healingRitualSection {
+        display: none;
+        background: rgba(255, 255, 255, 0.98);
+        border-radius: 15px;
+        padding: 25px;
+        margin: 20px 0;
+        text-align: center;
+    }
+
+    .breathing-container {
+        margin: 20px 0;
+    }
+
+    #sphere {
+        width: 100px;
+        height: 100px;
+        background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+        border-radius: 50%;
+        margin: 20px auto;
+        transition: all 4s ease-in-out;
+    }
+
+    .breathing-in #sphere {
+        transform: scale(1.5);
+        background: linear-gradient(135deg, #c2e9fb, #a1c4fd);
+    }
+
+    #breath-text {
+        font-size: 1.5rem;
+        margin: 10px;
+        color: #5d7da6;
+        font-weight: bold;
+    }
+
+    .breathing-buttons {
+        margin: 15px 0;
+    }
+
+    .ritual-button {
+        background-color: #8aaee4;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 50px;
+        margin: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .ritual-button:hover {
+        background-color: #6d93d1;
+        transform: scale(1.05);
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .journal-container {
+        margin: 25px 0;
+    }
+
+    .journal-textarea {
+        width: 100%;
+        height: 80px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 12px;
+        font-family: inherit;
+        font-size: 1rem;
+        margin: 10px 0;
+        box-sizing: border-box;
+    }
+
+    #journal-output {
+        margin-top: 20px;
+        padding: 15px;
+        border-radius: 10px;
+        background-color: #f8f9fa;
+        color: #5d7da6;
+        font-style: italic;
+        min-height: 20px;
+    }
+
+    .affirmation {
+        font-weight: 500;
+        color: #7a98c3;
+        margin-top: 30px;
+        font-size: 0.9rem;
+    }
+
+    /* Digital Library and Gaming Zone */
+    #digitalLibrary, #gamingZone { 
+        margin-top: 50px; 
+        display: block !important;
+    }
+    #digitalLibrary ul, #gamingZone ul { list-style: none; padding: 0; }
+    #digitalLibrary li, #gamingZone li { margin: 10px 0; }
+    .game-modal {
+        display:none;
+        position:fixed;
+        z-index:1000;
+        left:0;top:0;
+        width:100%;height:100%;
+        background: rgba(0,0,0,0.9);
+        color:#fff;
+        overflow:auto;
+        padding:50px 20px;
+    }
+    .game-modal button.closeModal {
+        position:absolute;
+        top:10px; right:20px;
+        background:red; color:white;
+        border:none; padding:10px 15px; font-size:16px;
+        cursor:pointer;
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <img src="Cipher.png" alt="Cipher App Icon" class="icon">
+    <h1>Welcome to Cipher Chat App</h1>
+    <p>Connect anonymously and chat safely.</p>
+</header>
+
+<div class="section">
+    <h2>Download App</h2>
+    <a href="Cipher-Release-v1.apk" class="download-link" download>Download Signed APK</a>
+    <a href="https://sourceforge.net/projects/cipher-chat-app/" class="download-link" target="_blank">Download from SourceForge</a>
+</div>
+
+<div class="section">
+    <h2>Contact / Feedback</h2>
+    <form action="https://formspree.io/f/xwpqzaer" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="_replyto" required>
+
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+
+        <button type="submit">Send</button>
+    </form>
+</div>
+
+<div class="section">
+    <h2>Background Music</h2>
+    <audio controls autoplay loop>
+        <source src="Shiva.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+</div>
+
+<!-- Protocol Buttons -->
+<button id="selfLoveBtn" class="protocol-btn">Self Love Protocol</button>
+<button id="musicJourneyBtn" class="protocol-btn">Musical Journey Protocol</button>
+<button id="closureBtn" class="protocol-btn">Closure Protocol</button>
+
+<!-- Self Love Protocol Section -->
+<div id="selfLoveSection" class="protocol-section">
+    <h2>Self Love Protocol</h2>
+    <audio controls autoplay>
+        <source src="emblem.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <h3>Meditation (5–10 min)</h3>
+    <p>Sit comfortably, close your eyes, and focus on your breath. Inhale deeply, exhale slowly, releasing tension. Visualize a warm golden light filling your heart and radiating through your body.</p>
+
+    <h3>Affirmations</h3>
+    <ul>
+        <li>I am worthy of love, peace, and happiness.</li>
+        <li>I honor my body, mind, and soul.</li>
+        <li>I release fear and embrace confidence and clarity.</li>
+    </ul>
+
+    <h3>Journaling (2–3 min)</h3>
+    <textarea placeholder="Write here..."></textarea>
+
+    <h3>Energy Visualization (2–3 min)</h3>
+    <p>Imagine a protective golden bubble surrounding your body. Feel it shield you from negativity and amplify positive energy. Sense this energy grounding you, filling you with confidence, love, and calm.</p>
+    
+    <!-- Healing Ritual Button -->
+    <button id="healingRitualBtn">Begin Healing Ritual</button>
+    
+    <!-- Healing Ritual Section -->
+    <div id="healingRitualSection">
+        <h2 style="color: #5d7da6;">Healing Ritual</h2>
+        
+        <div class="breathing-container">
+            <h3>Center with Your Breath</h3>
+            <p>Follow the sphere. Breathe in as it expands, and out as it contracts.</p>
+            <div id="sphere"></div>
+            <p id="breath-text">Click Begin to Start</p>
+            
+            <div class="breathing-buttons">
+                <button id="start-breath" class="ritual-button">Begin</button>
+                <button id="stop-breath" class="ritual-button hidden">Pause</button>
+                <button id="music-btn" class="ritual-button">Music: Off</button>
+            </div>
+        </div>
+        
+        <div class="journal-container">
+            <h3>Release & Set Intention</h3>
+            <p>This is your private space. Nothing is saved.</p>
+            <textarea id="release-input" class="journal-textarea" placeholder="What would you like to release? (A thought, a feeling, a memory...)"></textarea>
+            <textarea id="intention-input" class="journal-textarea" placeholder="What would you like to invite in? (Peace, strength, hope...)"></textarea>
+            <button id="release-btn" class="ritual-button">Release & Transform</button>
+            <div id="journal-output"></div>
+        </div>
+        
+        <p class="affirmation">You are stronger than you feel. This moment will pass.</p>
+    </div>
+</div>
+
+<!-- Musical Journey Protocol Section -->
+<div id="musicJourneySection" class="protocol-section">
+    <h2>My Musical Journey</h2>
+    
+    <div class="profile-container">
+        <img src="Irene.png" alt="Irene - Developer & Musician" class="profile-image" onerror="this.style.display='none'">
+        <h3>Irene - Developer & Composer</h3>
+        <p>Welcome to my musical world! I'm a passionate developer, composer, and multi-instrumentalist who finds healing and expression through music.</p>
+        
+        <div class="skills">
+            <h4>🎹 Piano • 🎸 Guitar • 💻 Development • 🎼 Composition</h4>
+        </div>
+    </div>
+
+    <div class="profile-links">
+        <h3>My Music & Books</h3>
+        <a href="https://www.amazon.com/author/gentlesoldier" class="profile-link" target="_blank">📚 My Books on Amazon</a>
+        <a href="https://www.soundcloud.com/irene-dutta" class="profile-link" target="_blank">🎵 My Music on SoundCloud</a>
+        <a href="https://irenedutta.bandcamp.com" class="profile-link" target="_blank">🎶 My Albums on Bandcamp</a>
+    </div>
+
+    <div style="text-align: center; margin: 30px 0;">
+        <h3>Book a Demo Music Class</h3>
+        <p>Interested in learning piano, guitar, or music composition? Let's create beautiful music together!</p>
+        <button class="booking-btn" onclick="window.open('https://calendly.com/irenemusicjourney', '_blank')">Schedule a Session</button>
+    </div>
+
+    <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0;">
+        <h3>My Musical Philosophy</h3>
+        <p>"Music is my sanctuary - where code meets melody, and technology dances with emotion. Every chord tells a story, every line of code creates possibility."</p>
+    </div>
+</div>
+
+<!-- Closure Protocol Section -->
+<div id="closureSection" class="protocol-section">
+    <h2>Closure Protocol</h2>
+    <h3>Tribute to My Music Teacher</h3>
+    <p>This space is dedicated to the memory of my music teacher who taught me so much about life, art, and perseverance.</p>
+    
+    <div style="text-align: center; margin: 20px 0;">
+        <img src="music_teacher_tribute.jpg" alt="Tribute to Music Teacher" style="max-width: 300px; border-radius: 10px; margin: 15px 0;" onerror="this.style.display='none'">
+    </div>
+    
+    <h3>Their Legacy Lives On Through:</h3>
+    <ul>
+        <li>The melodies that continue to inspire</li>
+        <li>The students whose lives they transformed</li>
+        <li>The love of music they instilled in everyone</li>
+        <li>The memories that bring comfort and strength</li>
+    </ul>
+    
+    <h3>My Musical Tributes - Original Compositions</h3>
+    
+    <div style="margin: 20px 0; padding: 15px; background: #f8f9fa; border-radius: 10px;">
+        <h4>🎵 "Eternal Gratitude"</h4>
+        <audio controls style="width: 100%; margin: 10px 0;">
+            <source src="eternal_gratitude.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <p><em>A composition dedicated to the enduring impact of a true mentor</em></p>
+    </div>
+    
+    <div style="margin: 20px 0; padding: 15px; background: #f8f9fa; border-radius: 10px;">
+        <h4>🎵 "Legacy of Notes"</h4>
+        <audio controls style="width: 100%; margin: 10px 0;">
+            <source src="legacy_of_notes.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <p><em>Celebrating the musical journey they inspired</em></p>
+    </div>
+    
+    <h3>Final Musical Farewell</h3>
+    <audio controls style="width: 100%; margin: 15px 0;">
+        <source src="teachers_legacy.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    
+    <textarea placeholder="Share your memories or final words of gratitude here..." style="height: 100px; width: 100%; margin-top: 15px; padding: 10px; border-radius: 6px; border: 1px solid #ccc;"></textarea>
+</div>
+
+<!-- Digital Library -->
+<div class="section" id="digitalLibrary">
+    <h2>Digital Library</h2>
+    <ul>
+        <li><a href="books/learn_js.pdf" target="_blank">Learn JavaScript</a></li>
+        <li><a href="books/html_css_guide.pdf" target="_blank">HTML & CSS Guide</a></li>
+        <li><a href="books/python_beginners.pdf" target="_blank">Python for Beginners</a></li>
+        <li><a href="books/cpp_fundamentals.pdf" target="_blank">C++ Fundamentals</a></li>
+        <li><a href="books/java_fundamentals.pdf" target="_blank">Java Fundamentals</a></li>
+        <li><a href="books/clean_code.pdf" target="_blank">Clean Code by Robert C. Martin</a></li>
+        <li><a href="books/design_patterns.pdf" target="_blank">Design Patterns</a></li>
+        <li><a href="books/sci_fi_novel1.pdf" target="_blank">The Martian by Andy Weir</a></li>
+        <li><a href="books/sci_fi_novel2.pdf" target="_blank">Neuromancer by William Gibson</a></li>
+        <li><a href="books/sci_fi_novel3.pdf" target="_blank">Foundation by Isaac Asimov</a></li>
+    </ul>
+</div>
+
+<!-- Gaming Zone -->
+<div class="section" id="gamingZone">
+    <h2>Gaming Zone</h2>
+    <ul>
+        <li><button onclick="openGame('ticTacToe')">Play Tic-Tac-Toe</button></li>
+        <li><button onclick="openGame('snakeGame')">Play Snake</button></li>
+        <li><button onclick="openGame('memoryGame')">Play Memory Game</button></li>
+    </ul>
+</div>
+
+<!-- Game Modals -->
+<div id="ticTacToe" class="game-modal">
+    <button class="closeModal" onclick="closeGame('ticTacToe')">X</button>
+    <h2>Tic-Tac-Toe</h2>
+    <div id="ticTacToeBoard" style="display:grid;grid-template-columns:100px 100px 100px;gap:5px;margin:20px auto;"></div>
+    <p id="ticTacToeResult"></p>
+</div>
+
+<div id="snakeGame" class="game-modal">
+    <button class="closeModal" onclick="closeGame('snakeGame')">X</button>
+    <h2>Snake Game</h2>
+    <canvas id="snakeCanvas" width="300" height="300" style="background:#000;margin-top:20px;"></canvas>
+</div>
+
+<div id="memoryGame" class="game-modal">
+    <button class="closeModal" onclick="closeGame('memoryGame')">X</button>
+    <h2>Memory Game</h2>
+    <div id="memoryBoard" style="display:grid;grid-template-columns:repeat(4,100px);gap:5px;margin:20px auto;"></div>
+</div>
+
+<script>
+// Protocol Toggle Functions
+function showProtocol(protocolToShow) {
+    // Hide all protocol sections
+    document.querySelectorAll('.protocol-section').forEach(section => {
+        section.style.display = 'none';
+    });
+    
+    // Show the requested protocol
+    document.getElementById(protocolToShow).style.display = 'block';
+    
+    // Scroll to the protocol
+    document.getElementById(protocolToShow).scrollIntoView({behavior: "smooth"});
+}
+
+document.getElementById('selfLoveBtn').addEventListener('click', function() {
+    showProtocol('selfLoveSection');
+});
+
+document.getElementById('musicJourneyBtn').addEventListener('click', function() {
+    showProtocol('musicJourneySection');
+});
+
+document.getElementById('closureBtn').addEventListener('click', function() {
+    showProtocol('closureSection');
+});
+
+// Healing Ritual Toggle
+document.getElementById('healingRitualBtn').addEventListener('click', function() {
+    var section = document.getElementById('healingRitualSection');
+    if (section.style.display === 'block') {
+        section.style.display = 'none';
+        this.textContent = 'Begin Healing Ritual';
+    } else {
+        section.style.display = 'block';
+        this.textContent = 'Hide Healing Ritual';
+        section.scrollIntoView({behavior: "smooth"});
+    }
+});
+
+// ** CREATE THE CALMING SOUND **
+let audioContext;
+let oscillator;
+let gainNode;
+let isSoundPlaying = false;
+
+function createCalmTone() {
+    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    oscillator = audioContext.createOscillator();
+    gainNode = audioContext.createGain();
+
+    oscillator.type = 'sine';
+    oscillator.frequency.setValueAtTime(220, audioContext.currentTime);
+    gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    oscillator.start();
+}
+
+function toggleSound() {
+    if (!audioContext) {
+        createCalmTone();
+        musicBtn.textContent = "Music: On";
+        isSoundPlaying = true;
+    } else {
+        if (isSoundPlaying) {
+            audioContext.suspend();
+            musicBtn.textContent = "Music: Off";
+            isSoundPlaying = false;
+        } else {
+            audioContext.resume();
+            musicBtn.textContent = "Music: On";
+            isSoundPlaying = true;
+        }
+    }
+}
+
+// ** BREATHING SPHERE FUNCTIONALITY **
+const sphere = document.getElementById('sphere');
+const breathText = document.getElementById('breath-text');
+const startBtn = document.getElementById('start-breath');
+const stopBtn = document.getElementById('stop-breath');
+const musicBtn = document.getElementById('music-btn');
+
+let breathInterval;
+let isBreathing = false;
+
+const breathCycle = () => {
+    breathText.textContent = "Breathe In...";
+    document.getElementById('healingRitualSection').classList.add('breathing-in');
+    setTimeout(() => {
+        breathText.textContent = "Hold...";
+        setTimeout(() => {
+            breathText.textContent = "Breathe Out...";
+            document.getElementById('healingRitualSection').classList.remove('breathing-in');
+        }, 2000);
+    }, 4000);
+};
+
+startBtn.addEventListener('click', () => {
+    isBreathing = true;
+    startBtn.classList.add('hidden');
+    stopBtn.classList.remove('hidden');
+    breathCycle();
+    breathInterval = setInterval(breathCycle, 12000);
+});
+
+stopBtn.addEventListener('click', () => {
+    isBreathing = false;
+    clearInterval(breathInterval);
+    startBtn.classList.remove('hidden');
+    stopBtn.classList.add('hidden');
+    breathText.textContent = "Paused. Click Begin to continue.";
+    document.getElementById('healingRitualSection').classList.remove('breathing-in');
+});
+
+musicBtn.addEventListener('click', toggleSound);
+
+// ** JOURNAL FUNCTIONALITY **
+const releaseInput = document.getElementById('release-input');
+const intentionInput = document.getElementById('intention-input');
+const releaseBtn = document.getElementById('release-btn');
+const output = document.getElementById('journal-output');
+
+releaseBtn.addEventListener('click', () => {
+    const thingToRelease = releaseInput.value.trim();
+    const thingToInvite = intentionInput.value.trim();
+
+    if (thingToRelease === "" && thingToInvite === "") {
+        output.textContent = "Take a moment to listen to what your heart needs.";
+        return;
+    }
+
+    let message = "";
+
+    if (thingToRelease) {
+        message += `You are gently releasing <strong>"${thingToRelease}"</strong>. `;
+    }
+    if (thingToInvite) {
+        message += `You are opening your heart to <strong>"${thingToInvite}"</strong>. `;
+    }
+
+    message += "Watch the words fade, and feel the space they leave behind. This is your peace.";
+
+    output.innerHTML = message;
+
+    setTimeout(() => {
+        releaseInput.value = "";
+        intentionInput.value = "";
+    }, 2000);
+});
+
+// Game Modal Functions
+function openGame(id){ document.getElementById(id).style.display='block'; }
+function closeGame(id){ document.getElementById(id).style.display='none'; }
+
+// Tic-Tac-Toe
+let ticBoard = ["","","","","","","","",""];
+let ticTurn = "X";
+function createTicBoard(){
+    const boardDiv = document.getElementById('ticTacToeBoard');
+    boardDiv.innerHTML="";
+    ticBoard.forEach((cell,i)=>{
+        let btn = document.createElement('button');
+        btn.style.width="100px"; btn.style.height="100px"; btn.style.fontSize="30px";
+        btn.innerText = ticBoard[i];
+        btn.onclick = ()=>{ if(ticBoard[i]==""){ticBoard[i]=ticTurn; ticTurn=ticTurn=="X"?"O":"X"; createTicBoard(); checkTicWinner(); }};
+        boardDiv.appendChild(btn);
+    });
+}
+function checkTicWinner(){
+    const combos = [[0,1,2],[3,4,5],[极速6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+    for(let c of combos){
+        if(ticBoard[c[0]]!=="" && ticBoard[c[0]]===ticBoard[c[1]] && ticBoard[c[1]]===ticBoard[c[2]]){
+            document.getElementById('ticTacToeResult').innerText="Winner: "+ticBoard[c[0]];
+            return;
+        }
+    }
+}
+createTicBoard();
+
+// Snake Game
+const canvas=document.getElementById("snakeCanvas");
+const ctx=canvas.getContext("2d");
+let grid=15, snake=[{x:150,y:150}], dx=grid, dy=0, apple={x:0,y:0};
+function spawnApple(){apple.x=Math.floor(Math.random()*20)*grid; apple.y=Math.floor(Math.random()*20)*grid;}
+spawnApple();
+function gameLoop(){
+    ctx.fillStyle="#000"; ctx.fillRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle="red"; ctx.fillRect(apple.x,apple.y,grid,grid);
+    let head={x:snake极速.x+dx, y:snake[0].y+dy};
+    snake.unshift(head);
+    if(head.x===apple.x && head.y===apple.y){spawnApple();}else{snake.pop();}
+    ctx.fillStyle="lime"; snake.forEach(s=>ctx.fillRect(s.x,s.y,grid,grid));
+    if(head.x<0||head.x>=canvas.width||head.y<0||head.y>=canvas.height||snake.slice(1).some(s=>s.x===head.x && s.y===head.y)){snake=[{x:150,y:150}]; dx=grid; dy=0;}
+}
+document.addEventListener("keydown",e=>{
+    if(e.key==="ArrowUp" && dy===0){dx=0;dy=-grid;}
+    else if(e.key==="ArrowDown" && dy===0){dx极速=0;dy=grid;}
+    else if(e.key==="ArrowLeft" && dx===0){dx=-grid;dy=0;}
+    else if(e.key==="ArrowRight" && dx===0){dx=grid;dy=0;}
+});
+setInterval(gameLoop,100);
+
+// Memory Game
+let memValues=["🍎","🍌","🍇","🍓","🍍","🥝","🍒","🥭","🍎","🍌","🍇","🍓","🍍","🥝","🍒","🥭"];
+memValues.sort(()=>0.5-Math.random());
+let memBoard=document.getElementById("memoryBoard"), memFirst=null, memSecond=null, memLock=false;
+memValues.forEach((val,i)=>{
+    let btn=document.createElement("button");
+    btn.style.width="100px"; btn.style.height="100px"; btn.style.fontSize="40px";
+    btn.innerText="?";
+    btn.onclick=function(){
+        if(memLock || this.innerText!=="?") return;
+        this.innerText=val;
+        if(!memFirst){memFirst={btn:this,val:val};} else {memSecond={btn:this,val:val};memLock=true;
+            setTimeout(()=>{
+                if(memFirst.val!==memSecond.val){memFirst.btn.innerText="?"; memSecond.btn.innerText="?";}
+                memFirst=null; memSecond=null; memLock=false;
+            },1000);
+        }
+    };
+    memBoard.appendChild(btn);
+});
+</script>
+
+</body>
+</html>
