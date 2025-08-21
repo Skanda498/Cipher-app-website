@@ -1,0 +1,376 @@
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cipher Chat App</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #1f1c2c, #928dab);
+    color: #fff;
+    text-align: center;
+    padding: 30px;
+}
+header { margin-bottom: 20px; }
+h1 { font-size: 2.5em; margin-bottom: 10px; }
+.icon { width: 120px; height: 120px; }
+.section { margin: 30px 0; }
+
+/* Buttons */
+a.download-link, button.download-link {
+    display: inline-block;
+    background: #ff4e00;
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 10px;
+    transition: background 0.3s ease;
+    cursor: pointer;
+}
+button.download-link { border: none; }
+a.download-link:hover, button.download-link:hover { background: #ff7300; }
+
+form {
+    display: inline-block;
+    margin-top: 20px;
+    text-align: left;
+    background: rgba(0,0,0,0.5);
+    padding: 20px;
+    border-radius: 10px;
+}
+form input, form textarea {
+    width: 100%;
+    margin: 8px 0;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+}
+form button {
+    background: #ff4e00;
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+form button:hover { background: #ff7300; }
+audio { margin-top: 20px; }
+
+/* Self Love & Closure Protocol Buttons */
+.protocolBtn {
+    display: inline-block;
+    margin: 40px 10px 20px 10px;
+    padding: 15px 25px;
+    background-color: #ff4e00;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+.protocolSection {
+    display: none;
+    background: rgba(255, 255, 255, 0.95);
+    color: #000;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 10px;
+    text-align: left;
+}
+.protocolSection h2, .protocolSection h3 { color: #333; }
+.protocolSection ul { margin-left: 20px; }
+.protocolSection textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    resize: vertical;
+}
+
+/* Digital Library and Gaming Zone */
+#digitalLibrary, #gamingZone { margin-top: 50px; }
+#digitalLibrary ul, #gamingZone ul { list-style: none; padding: 0; }
+#digitalLibrary li, #gamingZone li { margin: 10px 0; }
+.game-modal {
+    display:none;
+    position:fixed;
+    z-index:1000;
+    left:0;top:0;
+    width:100%;height:100%;
+    background: rgba(0,0,0,0.9);
+    color:#fff;
+    overflow:auto;
+    padding:50px 20px;
+}
+.game-modal button.closeModal {
+    position:absolute;
+    top:10px; right:20px;
+    background:red; color:white;
+    border:none; padding:10px 15px; font-size:16px;
+    cursor:pointer;
+}
+
+/* Math Behind Cipher Section */
+#mathSection {
+    display:none;
+    background: rgba(255,255,255,0.95);
+    color:#000;
+    padding:20px;
+    margin-top:20px;
+    border-radius:10px;
+    text-align:left;
+}
+#mathSection h2 { color:#333; }
+#mathSection pre { background:#eee; padding:15px; border-radius:8px; overflow-x:auto; }
+</style>
+</head>
+<body>
+
+<header>
+    <img src="Cipher.png" alt="Cipher App Icon" class="icon">
+    <h1>Welcome to Cipher Chat App</h1>
+    <p>Connect anonymously and chat safely.</p>
+</header>
+
+<div class="section">
+    <h2>Download App</h2>
+    <a href="Cipher-Release-v1.apk" class="download-link" download>Download Signed APK</a>
+    <a href="https://sourceforge.net/projects/cipher-chat-app/" class="download-link" target="_blank">Download from SourceForge</a>
+    <button class="download-link" id="mathBtn">Math Behind Cipher</button>
+</div>
+
+<div class="section" id="mathSection">
+    <h2>Math Behind Cipher</h2>
+    <pre>
+Algorithm & Encryption Logic:
+----------------------------
+1. Uses AES-256 symmetric encryption for message confidentiality.
+2. Each message is encrypted with a unique session key.
+3. Keys are exchanged using Diffie-Hellman Key Exchange.
+4. Messages are base64-encoded for safe transmission.
+5. HMAC-SHA256 ensures message integrity.
+
+Technical Architecture:
+-----------------------
+- Frontend: React Native (for cross-platform app), HTML5/CSS3/JS for website.
+- Backend: Python Flask server (handles key exchange & minimal logging).
+- Database: SQLite (stores encrypted messages temporarily, no plaintext storage).
+- Real-time Communication: WebSocket protocol for low-latency messaging.
+- Security: End-to-end encryption ensures server never sees plaintext.
+- Modular Design: Frontend & backend loosely coupled; easy to scale or swap backend.
+
+Flow:
+-----
+User sends message → Encrypted → Sent via WebSocket → Decrypted at receiver → HMAC verified.
+    </pre>
+</div>
+
+<div class="section">
+    <h2>Contact / Feedback</h2>
+    <form action="https://formspree.io/f/xwpqzaer" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="_replyto" required>
+
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+
+        <button type="submit">Send</button>
+    </form>
+</div>
+
+<div class="section">
+    <h2>Background Music</h2>
+    <audio controls autoplay loop>
+        <source src="Shiva.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+</div>
+
+<!-- Protocol Buttons -->
+<button class="protocolBtn" id="selfLoveBtn">Self Love Protocol</button>
+<button class="protocolBtn" id="closureBtn">Closure Protocol</button>
+
+<!-- Self Love Protocol Section -->
+<div class="protocolSection" id="selfLoveSection">
+    <h2>Self Love Protocol</h2>
+    <audio controls>
+        <source src="emblem.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <h3>Meditation (5–10 min)</h3>
+    <p>Sit comfortably, close your eyes, and focus on your breath. Inhale deeply, exhale slowly, releasing tension. Visualize a warm golden light filling your heart and radiating through your body.</p>
+
+    <h3>Affirmations</h3>
+    <ul>
+        <li>I am worthy of love, peace, and happiness.</li>
+        <li>I honor my body, mind, and soul.</li>
+        <li>I release fear and embrace confidence and clarity.</li>
+    </ul>
+
+    <h3>Journaling (2–3 min)</h3>
+    <textarea placeholder="Write here..."></textarea>
+
+    <h3>Energy Visualization (2–3 min)</h3>
+    <p>Imagine a protective golden bubble surrounding your body. Feel it shield you from negativity and amplify positive energy. Sense this energy grounding you, filling you with confidence, love, and calm.</p>
+</div>
+
+<!-- Closure Protocol Section -->
+<div class="protocolSection" id="closureSection">
+    <h2>Closure Protocol</h2>
+    <p>This protocol is a heartfelt tribute to the mentor who shared invaluable musical wisdom, scales, and chords, guiding the path of creativity and expression. Your guidance resonates through each composition, and your lessons continue to inspire every note I play. I honor your patience, dedication, and the passion you instilled in me. Thank you for shaping my musical journey with love and precision.</p>
+
+    <h3>Compositions</h3>
+    <audio controls>
+        <source src="Track1.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <audio controls>
+        <source src="Track2.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+</div>
+
+<!-- Digital Library -->
+<div class="section" id="digitalLibrary">
+    <h2>Digital Library</h2>
+    <ul>
+        <li><a href="books/book1.pdf" target="_blank">Learn JavaScript (PDF)</a></li>
+        <li><a href="books/book2.pdf" target="_blank">HTML & CSS Guide (PDF)</a></li>
+        <li><a href="books/book3.pdf" target="_blank">Python for Beginners (PDF)</a></li>
+    </ul>
+</div>
+
+<!-- Gaming Zone -->
+<div class="section" id="gamingZone">
+    <h2>Gaming Zone</h2>
+    <ul>
+        <li><button onclick="openGame('ticTacToe')">Play Tic-Tac-Toe</button></li>
+        <li><button onclick="openGame('snakeGame')">Play Snake</button></li>
+        <li><button onclick="openGame('memoryGame')">Play Memory Game</button></li>
+    </ul>
+</div>
+
+<!-- Game Modals -->
+<div id="ticTacToe" class="game-modal">
+    <button class="closeModal" onclick="closeGame('ticTacToe')">X</button>
+    <h2>Tic-Tac-Toe</h2>
+    <div id="ticTacToeBoard" style="display:grid;grid-template-columns:100px 100px 100px;gap:5px;margin:20px auto;"></div>
+    <p id="ticTacToeResult"></p>
+</div>
+
+<div id="snakeGame" class="game-modal">
+    <button class="closeModal" onclick="closeGame('snakeGame')">X</button>
+    <h2>Snake Game</h2>
+    <canvas id="snakeCanvas" width="300" height="300" style="background:#000;margin-top:20px;"></canvas>
+</div>
+
+<div id="memoryGame" class="game-modal">
+    <button class="closeModal" onclick="closeGame('memoryGame')">X</button>
+    <h2>Memory Game</h2>
+    <div id="memoryBoard" style="display:grid;grid-template-columns:repeat(4,100px);gap:5px;margin:20px auto;"></div>
+</div>
+
+<script>
+// Protocol Buttons
+document.getElementById('selfLoveBtn').addEventListener('click', function() {
+    var section = document.getElementById('selfLoveSection');
+    section.style.display = 'block';
+    section.scrollIntoView({behavior: "smooth"});
+});
+document.getElementById('closureBtn').addEventListener('click', function() {
+    var section = document.getElementById('closureSection');
+    section.style.display = 'block';
+    section.scrollIntoView({behavior: "smooth"});
+});
+
+// Math Behind Cipher
+document.getElementById('mathBtn').addEventListener('click', function() {
+    var section = document.getElementById('mathSection');
+    section.style.display = 'block';
+    section.scrollIntoView({behavior: "smooth"});
+});
+
+// Game Modal Functions
+function openGame(id){ document.getElementById(id).style.display='block'; }
+function closeGame(id){ document.getElementById(id).style.display='none'; }
+
+// Tic-Tac-Toe Game
+let ticBoard = ["","","","","","","","",""];
+let ticTurn = "X";
+function createTicBoard(){
+    const boardDiv = document.getElementById('ticTacToeBoard');
+    boardDiv.innerHTML="";
+    ticBoard.forEach((cell,i)=>{
+        let btn = document.createElement('button');
+        btn.style.width="100px"; btn.style.height="100px"; btn.style.fontSize="30px";
+        btn.innerText = ticBoard[i];
+        btn.onclick = ()=>{ if(ticBoard[i]==""){ticBoard[i]=ticTurn; ticTurn=ticTurn=="X"?"O":"X"; createTicBoard(); checkTicWinner(); }};
+        boardDiv.appendChild(btn);
+    });
+}
+function checkTicWinner(){
+    const combos = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+    for(let c of combos){
+        if(ticBoard[c[0]]!=="" && ticBoard[c[0]]===ticBoard[c[1]] && ticBoard[c[1]]===ticBoard[c[2]]){
+            document.getElementById('ticTacToeResult').innerText="Winner: "+ticBoard[c[0]];
+            return;
+        }
+    }
+}
+createTicBoard();
+
+// Snake Game
+const canvas=document.getElementById("snakeCanvas");
+const ctx=canvas.getContext("2d");
+let grid=15, snake=[{x:150,y:150}], dx=grid, dy=0, apple={x:0,y:0};
+function spawnApple(){apple.x=Math.floor(Math.random()*20)*grid; apple.y=Math.floor(Math.random()*20)*grid;}
+spawnApple();
+function gameLoop(){
+    ctx.fillStyle="#000"; ctx.fillRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle="red"; ctx.fillRect(apple.x,apple.y,grid,grid);
+    let head={x:snake[0].x+dx, y:snake[0].y+dy};
+    snake.unshift(head);
+    if(head.x===apple.x && head.y===apple.y){spawnApple();}else{snake.pop();}
+    ctx.fillStyle="lime";
+    snake.forEach(s=>ctx.fillRect(s.x,s.y,grid,grid));
+    if(head.x<0||head.x>=canvas.width||head.y<0||head.y>=canvas.height||snake.slice(1).some(s=>s.x===head.x && s.y===head.y)){snake=[{x:150,y:150}]; dx=grid; dy=0;}
+}
+document.addEventListener("keydown",e=>{
+    if(e.key==="ArrowUp" && dy===0){dx=0;dy=-grid;}
+    else if(e.key==="ArrowDown" && dy===0){dx=0;dy=grid;}
+    else if(e.key==="ArrowLeft" && dx===0){dx=-grid;dy=0;}
+    else if(e.key==="ArrowRight" && dx===0){dx=grid;dy=0;}
+});
+setInterval(gameLoop,100);
+
+// Memory Game
+let memValues=["🍎","🍌","🍇","🍓","🍍","🥝","🍒","🥭","🍎","🍌","🍇","🍓","🍍","🥝","🍒","🥭"];
+memValues.sort(()=>0.5-Math.random());
+let memBoard=document.getElementById("memoryBoard"), memFirst=null, memSecond=null, memLock=false;
+memValues.forEach((val,i)=>{
+    let btn=document.createElement("button");
+    btn.style.width="100px"; btn.style.height="100px"; btn.style.fontSize="40px";
+    btn.innerText="?";
+    btn.onclick=function(){
+        if(memLock || this.innerText!=="?") return;
+        this.innerText=val;
+        if(!memFirst){memFirst={btn:this,val:val};} else {memSecond={btn:this,val:val};memLock=true;
+            setTimeout(()=>{
+                if(memFirst.val!==memSecond.val){memFirst.btn.innerText="?"; memSecond.btn.innerText="?";}
+                memFirst=null; memSecond=null; memLock=false;
+            },1000);
+        }
+    };
+    memBoard.appendChild(btn);
+});
+</script>
+
+</body>
+</html>
