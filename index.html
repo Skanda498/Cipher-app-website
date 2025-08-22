@@ -215,9 +215,7 @@
         transform: scale(1.05);
     }
 
-    .hidden {
-        display: none;
-    }
+    .hidden { display: none; }
 
     .journal-container {
         margin: 25px 0;
@@ -277,6 +275,25 @@
         border:none; padding:10px 15px; font-size:16px;
         cursor:pointer;
     }
+
+    /* Share row */
+    .share-row {
+        display:flex;
+        flex-wrap:wrap;
+        gap:8px;
+        align-items:center;
+        margin-top:16px;
+    }
+    .share-btn, .share-icon {
+        background:#eceff4;
+        color:#1f2937;
+        border:none;
+        border-radius:8px;
+        padding:8px 12px;
+        cursor:pointer;
+        font-size:14px;
+    }
+    .share-btn:hover, .share-icon:hover { filter: brightness(0.95); }
 </style>
 </head>
 <body>
@@ -323,7 +340,7 @@
 <button id="closureBtn" class="protocol-btn">Closure Protocol</button>
 
 <!-- Self Love Protocol Section -->
-<div id="selfLoveSection" class="protocol-section">
+<div id="selfLoveSection" class="protocol-section" data-protocol-slug="self-love" data-protocol-title="Self Love Protocol">
     <h2>Self Love Protocol</h2>
     <audio controls autoplay>
         <source src="emblem.mp3" type="audio/mpeg">
@@ -376,10 +393,20 @@
         
         <p class="affirmation">You are stronger than you feel. This moment will pass.</p>
     </div>
+
+    <!-- SHARE row -->
+    <div class="share-row" aria-label="Share Self Love Protocol">
+        <button class="share-btn" data-network="native">Share</button>
+        <button class="share-icon" data-network="whatsapp">WhatsApp</button>
+        <button class="share-icon" data-network="telegram">Telegram</button>
+        <button class="share-icon" data-network="facebook">Facebook</button>
+        <button class="share-icon" data-network="x">X</button>
+        <button class="share-icon" data-network="copy">Copy Link</button>
+    </div>
 </div>
 
 <!-- Musical Journey Protocol Section -->
-<div id="musicJourneySection" class="protocol-section">
+<div id="musicJourneySection" class="protocol-section" data-protocol-slug="music-journey" data-protocol-title="Musical Journey Protocol">
     <h2>My Musical Journey</h2>
     
     <div class="profile-container">
@@ -409,10 +436,20 @@
         <h3>My Musical Philosophy</h3>
         <p>"Music is my sanctuary - where code meets melody, and technology dances with emotion. Every chord tells a story, every line of code creates possibility."</p>
     </div>
+
+    <!-- SHARE row -->
+    <div class="share-row" aria-label="Share Musical Journey Protocol">
+        <button class="share-btn" data-network="native">Share</button>
+        <button class="share-icon" data-network="whatsapp">WhatsApp</button>
+        <button class="share-icon" data-network="telegram">Telegram</button>
+        <button class="share-icon" data-network="facebook">Facebook</button>
+        <button class="share-icon" data-network="x">X</button>
+        <button class="share-icon" data-network="copy">Copy Link</button>
+    </div>
 </div>
 
 <!-- Closure Protocol Section -->
-<div id="closureSection" class="protocol-section">
+<div id="closureSection" class="protocol-section" data-protocol-slug="closure" data-protocol-title="Closure Protocol">
     <h2>Closure Protocol</h2>
     <h3>Tribute to My Music Teacher</h3>
     <p>This space is dedicated to the memory of my music teacher who taught me so much about life, art, and perseverance.</p>
@@ -456,6 +493,16 @@
     </audio>
     
     <textarea placeholder="Share your memories or final words of gratitude here..." style="height: 100px; width: 100%; margin-top: 15px; padding: 10px; border-radius: 6px; border: 1px solid #ccc;"></textarea>
+
+    <!-- SHARE row -->
+    <div class="share-row" aria-label="Share Closure Protocol">
+        <button class="share-btn" data-network="native">Share</button>
+        <button class="share-icon" data-network="whatsapp">WhatsApp</button>
+        <button class="share-icon" data-network="telegram">Telegram</button>
+        <button class="share-icon" data-network="facebook">Facebook</button>
+        <button class="share-icon" data-network="x">X</button>
+        <button class="share-icon" data-network="copy">Copy Link</button>
+    </div>
 </div>
 
 <!-- Digital Library -->
@@ -506,33 +553,38 @@
 </div>
 
 <script>
-// Protocol Toggle Functions
-function showProtocol(protocolToShow) {
-    // Hide all protocol sections
-    document.querySelectorAll('.protocol-section').forEach(section => {
-        section.style.display = 'none';
-    });
-    
-    // Show the requested protocol
-    document.getElementById(protocolToShow).style.display = 'block';
-    
-    // Scroll to the protocol
-    document.getElementById(protocolToShow).scrollIntoView({behavior: "smooth"});
+/* ------------------ Protocol toggle + hash routing ------------------ */
+function showProtocol(sectionId, slug) {
+    document.querySelectorAll('.protocol-section').forEach(s => s.style.display = 'none');
+    const el = document.getElementById(sectionId);
+    if (!el) return;
+    el.style.display = 'block';
+    if (slug) {
+        // update hash without jumping to top
+        history.replaceState(null, '', '#' + slug);
+    }
+    el.scrollIntoView({behavior: "smooth"});
 }
-
 document.getElementById('selfLoveBtn').addEventListener('click', function() {
-    showProtocol('selfLoveSection');
+    showProtocol('selfLoveSection','self-love');
 });
-
 document.getElementById('musicJourneyBtn').addEventListener('click', function() {
-    showProtocol('musicJourneySection');
+    showProtocol('musicJourneySection','music-journey');
 });
-
 document.getElementById('closureBtn').addEventListener('click', function() {
-    showProtocol('closureSection');
+    showProtocol('closureSection','closure');
 });
 
-// Healing Ritual Toggle
+// On load: open the protocol from hash (if any)
+(function openFromHash(){
+    const map = { 'self-love':'selfLoveSection', 'music-journey':'musicJourneySection', 'closure':'closureSection' };
+    const slug = (location.hash || '').replace('#','');
+    if (map[slug]) {
+        showProtocol(map[slug], slug);
+    }
+})();
+
+/* ------------------ Healing Ritual Toggle ------------------ */
 document.getElementById('healingRitualBtn').addEventListener('click', function() {
     var section = document.getElementById('healingRitualSection');
     if (section.style.display === 'block') {
@@ -545,26 +597,19 @@ document.getElementById('healingRitualBtn').addEventListener('click', function()
     }
 });
 
-// ** CREATE THE CALMING SOUND **
-let audioContext;
-let oscillator;
-let gainNode;
-let isSoundPlaying = false;
-
+/* ------------------ Calming Sound ------------------ */
+let audioContext, oscillator, gainNode, isSoundPlaying = false;
 function createCalmTone() {
     audioContext = new (window.AudioContext || window.webkitAudioContext)();
     oscillator = audioContext.createOscillator();
     gainNode = audioContext.createGain();
-
     oscillator.type = 'sine';
     oscillator.frequency.setValueAtTime(220, audioContext.currentTime);
     gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
-
     oscillator.connect(gainNode);
     gainNode.connect(audioContext.destination);
     oscillator.start();
 }
-
 function toggleSound() {
     if (!audioContext) {
         createCalmTone();
@@ -583,16 +628,13 @@ function toggleSound() {
     }
 }
 
-// ** BREATHING SPHERE FUNCTIONALITY **
+/* ------------------ Breathing Sphere ------------------ */
 const sphere = document.getElementById('sphere');
 const breathText = document.getElementById('breath-text');
 const startBtn = document.getElementById('start-breath');
 const stopBtn = document.getElementById('stop-breath');
 const musicBtn = document.getElementById('music-btn');
-
 let breathInterval;
-let isBreathing = false;
-
 const breathCycle = () => {
     breathText.textContent = "Breathe In...";
     document.getElementById('healingRitualSection').classList.add('breathing-in');
@@ -604,60 +646,90 @@ const breathCycle = () => {
         }, 2000);
     }, 4000);
 };
-
 startBtn.addEventListener('click', () => {
-    isBreathing = true;
     startBtn.classList.add('hidden');
     stopBtn.classList.remove('hidden');
     breathCycle();
     breathInterval = setInterval(breathCycle, 12000);
 });
-
 stopBtn.addEventListener('click', () => {
-    isBreathing = false;
     clearInterval(breathInterval);
     startBtn.classList.remove('hidden');
     stopBtn.classList.add('hidden');
     breathText.textContent = "Paused. Click Begin to continue.";
     document.getElementById('healingRitualSection').classList.remove('breathing-in');
 });
-
 musicBtn.addEventListener('click', toggleSound);
 
-// ** JOURNAL FUNCTIONALITY **
+/* ------------------ Journal ------------------ */
 const releaseInput = document.getElementById('release-input');
 const intentionInput = document.getElementById('intention-input');
 const releaseBtn = document.getElementById('release-btn');
 const output = document.getElementById('journal-output');
-
 releaseBtn.addEventListener('click', () => {
     const thingToRelease = releaseInput.value.trim();
     const thingToInvite = intentionInput.value.trim();
-
-    if (thingToRelease === "" && thingToInvite === "") {
+    if (!thingToRelease && !thingToInvite) {
         output.textContent = "Take a moment to listen to what your heart needs.";
         return;
     }
-
     let message = "";
-
-    if (thingToRelease) {
-        message += `You are gently releasing <strong>"${thingToRelease}"</strong>. `;
-    }
-    if (thingToInvite) {
-        message += `You are opening your heart to <strong>"${thingToInvite}"</strong>. `;
-    }
-
+    if (thingToRelease) message += `You are gently releasing <strong>"${thingToRelease}"</strong>. `;
+    if (thingToInvite) message += `You are opening your heart to <strong>"${thingToInvite}"</strong>. `;
     message += "Watch the words fade, and feel the space they leave behind. This is your peace.";
-
     output.innerHTML = message;
-
-    setTimeout(() => {
-        releaseInput.value = "";
-        intentionInput.value = "";
-    }, 2000);
+    setTimeout(() => { releaseInput.value = ""; intentionInput.value = ""; }, 2000);
 });
 
+/* ------------------ SHARE BUTTONS (per protocol) ------------------ */
+function shareForSection(sectionEl, network) {
+    const slug = sectionEl.dataset.protocolSlug;
+    const title = 'Cipher • ' + (sectionEl.dataset.protocolTitle || 'Protocol');
+    const urlObj = new URL(window.location.href);
+    urlObj.hash = slug;
+    const url = urlObj.toString();
+
+    const enc = encodeURIComponent;
+    const shareLinks = {
+        whatsapp: `https://api.whatsapp.com/send?text=${enc(title)}%20${enc(url)}`,
+        telegram: `https://t.me/share/url?url=${enc(url)}&text=${enc(title)}`,
+        facebook: `https://www.facebook.com/sharer/sharer.php?u=${enc(url)}`,
+        x: `https://twitter.com/intent/tweet?text=${enc(title)}&url=${enc(url)}`
+    };
+
+    if (network === 'native' && navigator.share) {
+        navigator.share({ title, url }).catch(()=>{ /* user cancelled */ });
+        return;
+    }
+    if (network === 'copy') {
+        navigator.clipboard.writeText(url).then(()=>{
+            alert('Link copied: ' + url);
+        }).catch(()=>{
+            // fallback prompt
+            window.prompt('Copy this link:', url);
+        });
+        return;
+    }
+    if (shareLinks[network]) {
+        window.open(shareLinks[network], '_blank');
+    }
+}
+
+// attach listeners to each protocol section's share row
+document.querySelectorAll('.protocol-section').forEach(section => {
+    section.querySelectorAll('.share-btn, .share-icon').forEach(btn => {
+        btn.addEventListener('click', () => {
+            shareForSection(section, btn.dataset.network);
+        });
+    });
+    // hide native share button if not supported
+    if (!navigator.share) {
+        const nativeBtn = section.querySelector('.share-btn[data-network="native"]');
+        if (nativeBtn) nativeBtn.style.display = 'none';
+    }
+});
+
+/* ------------------ Games ------------------ */
 // Game Modal Functions
 function openGame(id){ document.getElementById(id).style.display='block'; }
 function closeGame(id){ document.getElementById(id).style.display='none'; }
@@ -677,7 +749,7 @@ function createTicBoard(){
     });
 }
 function checkTicWinner(){
-    const combos = [[0,1,2],[3,4,5],[极速6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+    const combos = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
     for(let c of combos){
         if(ticBoard[c[0]]!=="" && ticBoard[c[0]]===ticBoard[c[1]] && ticBoard[c[1]]===ticBoard[c[2]]){
             document.getElementById('ticTacToeResult').innerText="Winner: "+ticBoard[c[0]];
@@ -696,7 +768,7 @@ spawnApple();
 function gameLoop(){
     ctx.fillStyle="#000"; ctx.fillRect(0,0,canvas.width,canvas.height);
     ctx.fillStyle="red"; ctx.fillRect(apple.x,apple.y,grid,grid);
-    let head={x:snake极速.x+dx, y:snake[0].y+dy};
+    let head={x:snake[0].x+dx, y:snake[0].y+dy};
     snake.unshift(head);
     if(head.x===apple.x && head.y===apple.y){spawnApple();}else{snake.pop();}
     ctx.fillStyle="lime"; snake.forEach(s=>ctx.fillRect(s.x,s.y,grid,grid));
@@ -704,7 +776,7 @@ function gameLoop(){
 }
 document.addEventListener("keydown",e=>{
     if(e.key==="ArrowUp" && dy===0){dx=0;dy=-grid;}
-    else if(e.key==="ArrowDown" && dy===0){dx极速=0;dy=grid;}
+    else if(e.key==="ArrowDown" && dy===0){dx=0;dy=grid;}
     else if(e.key==="ArrowLeft" && dx===0){dx=-grid;dy=0;}
     else if(e.key==="ArrowRight" && dx===0){dx=grid;dy=0;}
 });
